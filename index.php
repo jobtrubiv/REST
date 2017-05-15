@@ -18,9 +18,14 @@
 	<div class="container">
 		<div class="row">
 			<div class="panel panel-default">
-		  <div class="panel-heading">getRubric 
+		  <div class="panel-heading">
+				getRubric  _
 				<button type="button" class="btn btn-primary" onclick="btnCat()">запрос корневых категорий </button>
-				<button type="button" class="btn btn-info" onclick="btnCatDev()">запрос корневых категорий dev</button>
+				<button type="button" class="btn btn-info" onclick="btnCatDev()">запрос корневых категорий dev</button><br>
+				<!--  -->
+				getProducts
+				<button type="button" class="btn btn-primary" onclick="btnProds()">запрос товаров категории 53 </button>
+				<button type="button" class="btn btn-info" onclick="btnProdsDev()">запрос товаров категории 53 dev</button><br>
 			</div>
 		  <div class="panel-body">
 
@@ -72,6 +77,44 @@
 				method: "POST",
 				data: {
 					metod: "category",
+					server: "dev"
+							},
+				success: function (data) {
+					console.log(data);
+					 var answer = JSON.parse(data);
+					 $(".head").html(answer.head);
+					 $(".body").html(answer.body);
+    			}
+			});
+		}
+	</script>
+	<script>
+		function btnProds(){
+			$(".panel-body").html('<div class="col-md-9">Ответ zomart.ru на запрос {"jsonrpc":"2.0","method":"getProducts","params":{"rubricId":53},"id":1}<br><br><div class="head"></div><div class="body"></div></div>');
+			$.ajax({
+				url: "get.php",
+				method: "POST",
+				data: {
+					metod: "Products",
+					server: "zomart"
+							},
+				success: function (data) {
+					console.log(data);
+					 var answer = JSON.parse(data);
+					 $(".head").html(answer.head);
+					 $(".body").html(answer.body);
+    			}
+			});
+		}
+	</script>
+	<script>
+		function btnProdsDev(){
+			$(".panel-body").html('<div class="col-md-9">Ответ dev04.zomart.ru на запрос {"jsonrpc":"2.0","method":"getProducts","params":{"rubricId":53},"id":1},"id":1};<br><br><div class="head"></div><div class="body"></div></div>');
+			$.ajax({
+				url: "get.php",
+				method: "POST",
+				data: {
+					metod: "Products",
 					server: "dev"
 							},
 				success: function (data) {
